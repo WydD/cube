@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>Méthode avancée Square-1 : Etape 2, Séparation des coins</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div style="float: left;"><a href="step_1.html">Étape précédente</a></div>
+<div style="float: right;"><a href="step_3.html">Étape suivante</a></div>
+<div style="clear:both;"/>
+<h1>Square-1 : méthode de résolution avancée</h1>
+<h2>Deuxième étape : Séparation des coins</h2>
+Le but de l'étape est d'avoir les coins des deux faces du Square-1 rassemblés. Pour ceux qui connaissent la méthode Guimond. Cette étape est très très intuitive et peut être résolue en 3 flips maximum.
+
+<h3>La méthode</h3>
+<ul>
+<li>Si vous connaissez les séquences de séparation de Guimond, il vous suffit de commencer par un (1,0) afin toujours conserver votre forme cubique. À partir de là, si on remplace U par (3,0) et R2 par /, les séquences sont exactement les mêmes.</li>
+<li>
+Pour les autres, le principe est très simple mais à but informatif et aussi de rapidité d'exécution, voici l'ensemble des séquences.
+
+<table border="0" width="100%">
+<tr align="center"><td>
+    <table border="0"><tr><td><img border="0" src="img/step2_c1.png"/></td><td><img border="0" src="img/step2_c2.png"/></td></tr><tr align="center"><td colspan="2">(1,0)/(-1,0)</td></tr></table>
+</td><td>
+<table border="0"><tr><td><img border="0" src="img/step2_diag1.png"/></td><td><img border="0" src="img/step2_diag2.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (3,3) / (-1,0)</td></tr></table>
+</td>
+<td>
+<table border="0"><tr><td><img border="0" src="img/step2_c3.png"/></td><td><img border="0" src="img/step2_c4.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (3,0) / (-1,0)</td></tr></table>
+</td><td>
+<table border="0"><tr><td><img border="0" src="img/step2_c1.png"/></td><td><img border="0" src="img/step2_diag1.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (0,3) / (0,3) / (-1,0)</td></tr></table>
+</td><td>
+<table border="0"><tr><td><img border="0" src="img/step2_diag2.png"/></td><td><img border="0" src="img/step2_c2.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (3,0) / (3,0) / (-1,0)</td></tr></table>
+</td></tr></table>
+
+Remarquez la présence du (1,0) qui ne fait que conserver l'état cubique du Square-1.
+</li>
+</ul>
+<h3>Expert : Anticiper l'étape d'après</h3>
+<p>C'est un fait acquis, l'anticipation est la clef de la vitesse. Ici, en plus de pouvoir anticiper la prochaine étape sur la séparation des arêtes lors du dernier flip notamment, il est aussi possible de "forcer" le skip. En effet, au lieu d'avoir un (1,0)/.../(-1,0), il peut être intéressant de faire (0,-1)/.../(0,1). Le principe reste le même pour les coins mais les blocs de coins/arêtes ne seront pas les mêmes. Dans les cas simple, il est possible avec un peu d'expérience de pouvoir forcer un skip de la prochaine étape. L'idée pour forcer le skip est de séparer le moins possible les arêtes des coins lorsqu'ils sont de la même couleur. </p>
+<p>Attention toutefois, cette optimisation ne s'applique qu'aux cas simples et dans la plupart des résolutions ceci ne sera pas possible directement. Il ne faut pas perdre du temps à analyser si on ne trouve pas d'un coup d'œil qu'une stratégie est préférable à l'autre. </p>
+</body>
+</html>

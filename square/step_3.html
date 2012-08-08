@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>Méthode avancée Square-1 : Etape 3, Séparation des arêtes</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div style="float: left;"><a href="step_2.html">Étape précédente</a></div>
+<div style="float: right;"><a href="step_4.html">Étape suivante</a></div>
+<div style="clear:both;"/>
+<h1>Square-1 : méthode de résolution avancée</h1>
+<h2>Troisième étape : Séparation des arêtes</h2>
+Le but de l'étape est d'avoir les arêtes des deux faces du Square-1 rassemblés. Ici, il devient dur d'appliquer les connaissances des autres cubes dans le sens ou il faut jouer sur le principe du (1,0), inexistant ailleurs.  
+
+<h3>La méthode</h3>
+<p>Le principe reste le même, on reconnait un cas et on l'applique. Toutefois, il existe trois classes de cas principaux.</p>
+<ul>
+<li>Le cas très simple (et son dérivé)</li>
+
+<table border="0" width="600">
+<tr align="center"><td width="50%">
+    <table border="0"><tr><td align="right"><img border="0" src="img/step3_3u.png"/></td><td><img border="0" src="img/step3_3d.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (-1,-1) / (0,1)</td></tr></table>
+</td><td>
+<table border="0"><tr><td align="right"><img border="0" src="img/step3_7u.png"/></td><td><img border="0" src="img/step3_7u.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (-1,-1) / (3,3) / (1,1) / (-1,0)</td></tr></table>
+</td>
+</tr>
+</table>
+
+Je conseillerais aux débutants de bien travailler le premier cas. Sa manipulation est très simple et à faire en aller-retour direct. Entendez par là qu'il n'y aura absolument aucun regrip. Le deuxième cas, quant à lui n'est que le premier fait deux fois avec un (3,3) entre temps. Ces cas conservent les positions de coins.
+</li>
+<li>Les cas indispensables
+
+<table border="0" width="600">
+<tr align="center"><td width="300">
+    <table border="0"><tr><td align="right"><img border="0" src="img/step3_1u.png"/></td><td><img border="0" src="img/step3_1d.png"/></td></tr><tr align="center"><td colspan="2">(0,-1) / (-3,0) / (4,1) / (-4,-1) / (3,0) / (0,-1)</td></tr></table>
+</td><td width="300">
+<table border="0"><tr><td align="right"><img border="0" src="img/step3_2u.png"/></td><td><img border="0" src="img/step3_2d.png"/></td></tr><tr align="center"><td colspan="2">(1,0) / (-3,0) / (-1,-1) / (4,1) / (-1,0)</td></tr></table>
+</td>
+</tr>
+</table>
+Ces cas sont ceux qui reviennent directement même dès le début. Il faut absolument savoir les passer rapidement. 
+</li>
+<li>Les cas plus difficiles.
+<table border="0" width="900">
+<tr align="center"><td width="300">
+    <table border="0"><tr><td align="right"><img border="0" src="img/step3_4u.png"/></td><td><img border="0" src="img/step3_4d.png"/></td></tr><tr align="center"><td colspan="2">(0,-1) / (1,4) / (-1,-4) / (-3,0) / (4,1) / (-1,0)</td></tr></table>
+</td><td width="300">
+<table border="0"><tr><td align="right"><img border="0" src="img/step3_3u.png"/></td><td><img border="0" src="img/step3_5d.png"/></td></tr><tr align="center"><td colspan="2">(0,-1) / (3,0) / (-3,0) / (1,-2) / (0,3) / (-1,0)</td></tr></table><td width="300">
+<table border="0"><tr><td align="right"><img border="0" src="img/step3_6u.png"/></td><td><img border="0" src="img/step3_3d.png"/></td></tr><tr align="center"><td colspan="2">(0,-1) / (3,0) / (0,-3) / (1,-2) / (3,0) / (-1,0)</td></tr></table>
+</td>
+</tr>
+</table>
+
+Ces cas ne sont pas extrêmement difficiles en vérité, mais ils ne sont pas absolument indispensable. En effet, il suffit de faire (1,0)/(-1,1)/(1,0), ou de faire attention lors de la précédente étape, pour revenir aux précédents cas.<br/>
+Le dernier cas inverse le haut et le bas en plus. Si vous voulez garder le contrôle, vous pouvez changer le (3,0)/(-1,0) par (-3,6)/(0,1) qui est plus difficile à passer.
+</li>
+</ul>
+<h3>Expert : Anticiper l'étape suivante</h3>
+L'étape suivante étant le placement de coins. Il sera certes facile de répérer cette étape mais il est parfois nécessaire de regarder sur la face de derrière. Il peut être intéressant d'avoir plusieurs informations avant de finir cette étape. Dans la liste ci-dessous, vous trouverez les influences des séquences présentés dans cette page. Par ordre d'apparition :
+<ol>
+<li>Conserve tout</li>
+<li>Conserve tout </li>
+<li>N en haut, et J en bas (coins conservés DFL, DBL)</li>
+<li>Conserve tout</li>
+<li>Double J (barres UF et DR)</li>
+<li>Double J (barres UR et DB)</li>
+<li>Double J (barres UB et DL)</li>
+</ol>
+
+En utilisant les cas qui conservent tout et des principes de setup, il est toujours possible de résoudre sans rien casser.
+</body>
+</html>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+ <head><title>imagecube.php</title>
+  <meta content="SubEthaEdit - http://www.codingmonkeys.de/subethaedit/" name="generator" />
+  <meta name="last-modified" content="Thu, 30 Apr 2009 23:53:26 GMT" />
+<meta name="DC.Date" content="2009-05-01" />
+<meta name="DC.Creator" content="Loic Petit" />
+<meta name="DC.Contributor" content="Loic Petit" />
+
+  <style type="text/css">
+h1 {
+    font-family: Arial, sanserif;
+    margin-bottom: 5px;
+}
+
+h4 {
+    padding-bottom:0px;
+    padding-right:10px;
+    margin-bottom:0.5em;
+    margin-top:10px ;
+    font-size:15px;
+    color:#000;
+}
+
+table { 
+    border-collapse: collapse;
+    margin: 5px;
+    font-family: Arial, sanserif;
+}
+
+th {
+    background-color:#ddd;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+    font-size:small;
+    text-align: left;
+    padding: 1px 4px 1px 4px;
+}
+
+th img {
+    position:relative;
+    top:1px;
+}
+
+tr {
+    background-color: #FFF;
+}
+
+tr.Alternate {
+    background-color: #EEF;
+}
+
+td {
+    border-bottom:1px solid #777;
+    font-size: 12px;
+    color:#555;
+    text-align:left;
+    vertical-align:center;
+    padding: 4px 15px;
+}
+
+td.ContributorName {
+    font-weight: bold;
+    color: #000;
+    font-size: 14px;
+}
+
+td.VisitorName {
+    font-weight: bold;
+    font-size: 12px;
+}.LoicPetit {
+    background-color: #bfcdff;
+}
+
+
+  </style>
+ </head>
+ <body><h1>imagecube.php</h1>
+
+<div style="text-align:left;color:#000000; background-color:#ffffff; border:solid black 1px; padding:0.5em 1em 0.5em 1em; overflow:auto;font-size:small; font-family:monospace; "><span style="color:#dd0000;"><strong>&lt;?php</strong></span><strong><br />
+<span style="color:#881350;">require_once</span>(<span style="color:#eb7300;">&quot;nxnimagecube.php&quot;</span>);<br />
+<span style="color:#881350;">class</span> MetaCube {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">protected</span> <span style="color:#825900;">$size</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">protected</span> <span style="color:#825900;">$stickers</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">protected</span> <span style="color:#825900;">$stickersPerFace</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">protected</span> <span style="color:#825900;">$faceAssociation</span> = <span style="color:#881350;">array</span>(<span style="color:#eb7300;">&quot;F&quot;</span>=&gt;<span style="color:#0000ff;">0</span>,<span style="color:#eb7300;">&quot;L&quot;</span>=&gt;<span style="color:#0000ff;">1</span>, <span style="color:#eb7300;">&quot;D&quot;</span>=&gt;<span style="color:#0000ff;">2</span>, <span style="color:#eb7300;">&quot;B&quot;</span>=&gt;<span style="color:#0000ff;">3</span>, <span style="color:#eb7300;">&quot;R&quot;</span>=&gt;<span style="color:#0000ff;">4</span>, <span style="color:#eb7300;">&quot;U&quot;</span>=&gt;<span style="color:#0000ff;">5</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">function</span> <span style="color:#003369;">MetaCube</span>(<span style="color:#825900;">$size</span>, <span style="color:#825900;">$pstickers</span> = <span style="color:#881350;">false</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;size = <span style="color:#825900;">$size</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;cardFace = <span style="color:#825900;">$size</span>*<span style="color:#825900;">$size</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">if</span>(!<span style="color:#825900;">$pstickers</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span> = <span style="color:#eb7300;">&quot;&quot;</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span> &lt; <span style="color:#0000ff;">6</span> ; <span style="color:#825900;">$i</span>++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$j</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$j</span> &lt; <span style="color:#825900;">$this</span>-&gt;cardFace ; <span style="color:#825900;">$j</span>++) <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span> .= <span style="color:#825900;">$i</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">if</span>(<span style="color:#661aa9;">strlen</span>(<span style="color:#825900;">$pstickers</span>) != <span style="color:#825900;">$this</span>-&gt;cardFace*<span style="color:#0000ff;">6</span>) <span style="color:#881350;">exit</span>();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;stickers = <span style="color:#825900;">$pstickers</span>; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Get the i-th sticker of the face <br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">private</span> <span style="color:#881350;">function</span> <span style="color:#003369;">getIndex</span>(<span style="color:#825900;">$face</span>, <span style="color:#825900;">$i</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">return</span> <span style="color:#825900;">$this</span>-&gt;faceAssociation[<span style="color:#825900;">$face</span>]*<span style="color:#825900;">$this</span>-&gt;cardFace+<span style="color:#825900;">$i</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Get the string that represents a face<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">private</span> <span style="color:#881350;">function</span> <span style="color:#003369;">getFaceString</span>(<span style="color:#825900;">$face</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$index</span> = <span style="color:#825900;">$this</span>-&gt;cardFace * <span style="color:#825900;">$this</span>-&gt;faceAssociation[<span style="color:#825900;">$face</span>{<span style="color:#0000ff;">0</span>}];<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">return</span> <span style="color:#661aa9;">substr</span>(<span style="color:#825900;">$this</span>-&gt;stickers, <span style="color:#825900;">$index</span>, <span style="color:#825900;">$this</span>-&gt;cardFace);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;} <br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Call the NxNImageCube primitive<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">function</span> <span style="color:#003369;">drawCube</span>(<span style="color:#825900;">$scheme</span> = <span style="color:#eb7300;">'012345'</span>, <span style="color:#825900;">$size</span> = <span style="color:#0000ff;">500</span>){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$scale</span>=<span style="color:#0000ff;">2</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span> = <span style="color:#eb7300;">&quot;&quot;</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span>.= <span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getFaceString</span>(<span style="color:#eb7300;">&quot;U&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span>.= <span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getFaceString</span>(<span style="color:#eb7300;">&quot;F&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span>.= <span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getFaceString</span>(<span style="color:#eb7300;">&quot;R&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$colors</span> = <span style="color:#881350;">array</span>(<span style="color:#eb7300;">&quot;0&quot;</span>=&gt;<span style="color:#eb7300;">&quot;b&quot;</span>, <span style="color:#eb7300;">&quot;1&quot;</span>=&gt;<span style="color:#eb7300;">&quot;o&quot;</span>, <span style="color:#eb7300;">&quot;2&quot;</span>=&gt;<span style="color:#eb7300;">&quot;w&quot;</span>, <span style="color:#eb7300;">&quot;3&quot;</span>=&gt;<span style="color:#eb7300;">&quot;g&quot;</span>, <span style="color:#eb7300;">&quot;4&quot;</span>=&gt;<span style="color:#eb7300;">&quot;r&quot;</span>, <span style="color:#eb7300;">&quot;5&quot;</span>=&gt;<span style="color:#eb7300;">&quot;y&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span> &lt; <span style="color:#0000ff;">6</span> ; <span style="color:#825900;">$i</span>++)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$pstickers</span> = <span style="color:#661aa9;">str_replace</span>(<span style="color:#825900;">$i</span>,<span style="color:#825900;">$colors</span>[<span style="color:#825900;">$scheme</span>{<span style="color:#825900;">$i</span>}], <span style="color:#825900;">$pstickers</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">return</span> <span style="color:#003369;">drawNxNImageCube</span>(<span style="color:#825900;">$size</span>, <span style="color:#825900;">$this</span>-&gt;size, <span style="color:#825900;">$scale</span>, <span style="color:#825900;">$thickness</span>, <span style="color:#825900;">$pstickers</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">private</span> <span style="color:#881350;">function</span> <span style="color:#003369;">rotateStickers</span>(<span style="color:#825900;">$faces</span>, <span style="color:#825900;">$index</span>) { <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$n</span> = <span style="color:#661aa9;">count</span>(<span style="color:#825900;">$faces</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$tmp</span> = <span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getIndex</span>(<span style="color:#825900;">$faces</span>[<span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span>],<span style="color:#825900;">$index</span>)};<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span> ; <span style="color:#825900;">$i</span> &gt;= <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span>--) &nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getIndex</span>(<span style="color:#825900;">$faces</span>[<span style="color:#825900;">$i</span>],<span style="color:#825900;">$index</span>)} = <span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getIndex</span>(<span style="color:#825900;">$faces</span>[<span style="color:#825900;">$i</span>-<span style="color:#0000ff;">1</span>],<span style="color:#825900;">$index</span>)};<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getIndex</span>(<span style="color:#825900;">$faces</span>[<span style="color:#0000ff;">0</span>],<span style="color:#825900;">$index</span>)} = <span style="color:#825900;">$tmp</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Switch coord inside a face with circles indexed by index<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">private</span> <span style="color:#881350;">function</span> <span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$x</span>,<span style="color:#825900;">$y</span>,<span style="color:#825900;">$circle</span>,<span style="color:#825900;">$index</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">return</span> <span style="color:#825900;">$index</span>+<span style="color:#825900;">$circle</span>+(<span style="color:#825900;">$y</span>+<span style="color:#825900;">$circle</span>)*<span style="color:#825900;">$this</span>-&gt;size+<span style="color:#825900;">$x</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">private</span> <span style="color:#881350;">function</span> <span style="color:#003369;">rotateFace</span>(<span style="color:#825900;">$F</span>, <span style="color:#825900;">$cw</span>=<span style="color:#881350;">true</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// This rotation is done circle by circle<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Firstly the outer circle, the easiest &nbsp;&nbsp;&nbsp;<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Let i the position of the stickers on the first row (&lt; n-1) <br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Here is the permutation : (i,0) -&gt; (n-1,i) -&gt; (n-i-1, n-1) -&gt; (0,n-i-1)<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Then for the next circle we do exactly the same permutation with <br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// &nbsp;&nbsp;a coordinate change and n -= 2<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// &nbsp;&nbsp;... iterate till n &lt;= 1<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$index</span> = <span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">getIndex</span>(<span style="color:#825900;">$F</span>,<span style="color:#0000ff;">0</span>); <span style="color:#236e25;"><em>// Base of the face<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$n</span> = <span style="color:#825900;">$this</span>-&gt;size; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$c</span> = <span style="color:#0000ff;">0</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">while</span>(<span style="color:#825900;">$n</span> &gt; <span style="color:#0000ff;">1</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span> &lt; <span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span> ; <span style="color:#825900;">$i</span>++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">if</span>(<span style="color:#825900;">$cw</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$permut</span> = <span style="color:#881350;">array</span>(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$i</span>,<span style="color:#0000ff;">0</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>), <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#0000ff;">0</span>,<span style="color:#825900;">$n</span>-<span style="color:#825900;">$i</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$n</span>-<span style="color:#825900;">$i</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$i</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span style="color:#881350;">else</span> {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$permut</span> = <span style="color:#881350;">array</span>(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$i</span>,<span style="color:#0000ff;">0</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>), <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$i</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#825900;">$n</span>-<span style="color:#825900;">$i</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$n</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">changeCoord</span>(<span style="color:#0000ff;">0</span>,<span style="color:#825900;">$n</span>-<span style="color:#825900;">$i</span>-<span style="color:#0000ff;">1</span>,<span style="color:#825900;">$c</span>,<span style="color:#825900;">$index</span>));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$tmp</span> = <span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$permut</span>[<span style="color:#0000ff;">0</span>]};<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$j</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$j</span> &lt; <span style="color:#0000ff;">3</span> ; <span style="color:#825900;">$j</span>++) &nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$permut</span>[<span style="color:#825900;">$j</span>]} = <span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$permut</span>[<span style="color:#825900;">$j</span>+<span style="color:#0000ff;">1</span>]};<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;stickers{<span style="color:#825900;">$permut</span>[<span style="color:#0000ff;">3</span>]} = <span style="color:#825900;">$tmp</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$c</span>++; <span style="color:#825900;">$n</span> -= <span style="color:#0000ff;">2</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Performs a R<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Col is the column on which it performs the move<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">function</span> <span style="color:#003369;">rotateR</span>(<span style="color:#825900;">$col</span>=<span style="color:#0000ff;">0</span>) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$path</span> = <span style="color:#881350;">array</span>(<span style="color:#eb7300;">&quot;F&quot;</span>, <span style="color:#eb7300;">&quot;U&quot;</span>, <span style="color:#eb7300;">&quot;B&quot;</span>, <span style="color:#eb7300;">&quot;D&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">if</span>(<span style="color:#825900;">$col</span> == <span style="color:#0000ff;">0</span>) <span style="color:#236e25;"><em>// fix the R face rotation<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;R&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$col</span> = <span style="color:#825900;">$this</span>-&gt;size-<span style="color:#0000ff;">1</span>-<span style="color:#825900;">$col</span>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// F -&gt; U -&gt; B -&gt; D<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span> &lt; <span style="color:#825900;">$this</span>-&gt;size ; <span style="color:#825900;">$i</span>++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateStickers</span>(<span style="color:#825900;">$path</span>, <span style="color:#825900;">$i</span>*<span style="color:#825900;">$this</span>-&gt;size+<span style="color:#825900;">$col</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Performs a x<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">function</span> <span style="color:#003369;">rotateX</span>() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$path</span> = <span style="color:#881350;">array</span>(<span style="color:#eb7300;">&quot;F&quot;</span>, <span style="color:#eb7300;">&quot;U&quot;</span>, <span style="color:#eb7300;">&quot;B&quot;</span>, <span style="color:#eb7300;">&quot;D&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span> &lt; <span style="color:#825900;">$this</span>-&gt;cardFace ; <span style="color:#825900;">$i</span>++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateStickers</span>(<span style="color:#825900;">$path</span>, <span style="color:#825900;">$i</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;L&quot;</span>,<span style="color:#881350;">false</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;R&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// Performs a y<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">function</span> <span style="color:#003369;">rotateY</span>() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$path</span> = <span style="color:#881350;">array</span>(<span style="color:#eb7300;">&quot;F&quot;</span>, <span style="color:#eb7300;">&quot;L&quot;</span>, <span style="color:#eb7300;">&quot;B&quot;</span>, <span style="color:#eb7300;">&quot;R&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#881350;">for</span>(<span style="color:#825900;">$i</span> = <span style="color:#0000ff;">0</span> ; <span style="color:#825900;">$i</span> &lt; <span style="color:#825900;">$this</span>-&gt;cardFace ; <span style="color:#825900;">$i</span>++) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateStickers</span>(<span style="color:#825900;">$path</span>, <span style="color:#825900;">$i</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;D&quot;</span>,<span style="color:#881350;">false</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;U&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// The representation of the B face is upside-down compared to F<br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#236e25;"><em>// We must fix everything <br />
+</em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;R&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;R&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;B&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#825900;">$this</span>-&gt;<span style="color:#003369;">rotateFace</span>(<span style="color:#eb7300;">&quot;B&quot;</span>);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<span style="color:#dd0000;">?&gt;</span></strong></div>
+<div id="footer" style="text-align:center; font-size:10px; color:#555; font-family: sanserif;">
+<br />Page created with <a href="http://www.codingmonkeys.de/subethaedit/" style="color:#555;">SubEthaEdit</a>
+</div>
+</body></html>

@@ -1,0 +1,72 @@
+eventId	score	count	personId	personName
+222	455	6	2008PIAU01	"Antoine Piau"
+222	433	7	2008VIRO01	"Philippe Virouleau"
+222	260	3	2009GUIL01	"Kevin Guillaumond"
+
+333	800	8	2008HANK01	"Kanneti Sae Han (คันธ์เนตี แซ่ห่าน)"
+333	373	6	2008PIAU01	"Antoine Piau"
+333	225	5	2006JACQ01	"Thibaut Jacquinot"
+
+333bf	520	6	2008MORE02	"Hippolyte Moreau"
+333bf	491	11	2004GALL02	"Clément Gallet"
+333bf	400	6	2008COUR01	"François Courtès"
+
+333fm	548	8	2004GALL02	"Clément Gallet"
+333fm	195	3	2009PETI01	"Loïc Petit"
+333fm	156	5	2008COUR01	"François Courtès"
+
+333ft	288	5	2008COUR01	"François Courtès"
+333ft	160	2	2010ESTU01	"Rémi Esturoune"
+333ft	160	2	2008MORE02	"Hippolyte Moreau"
+
+333mbf	360	4	2008COUR01	"François Courtès"
+333mbf	235	3	2008MORE02	"Hippolyte Moreau"
+333mbf	195	3	2004GALL02	"Clément Gallet"
+
+333oh	760	8	2008HANK01	"Kanneti Sae Han (คันธ์เนตี แซ่ห่าน)"
+333oh	390	6	2008PIAU01	"Antoine Piau"
+333oh	255	4	2006JACQ01	"Thibaut Jacquinot"
+
+444	435	7	2008VIRO01	"Philippe Virouleau"
+444	430	6	2008PIAU01	"Antoine Piau"
+444	360	4	2008LEME01	"Pierre Lemerle"
+
+444bf	100	1	2008COUR01	"François Courtès"
+
+555	620	7	2008HANK01	"Kanneti Sae Han (คันธ์เนตี แซ่ห่าน)"
+555	425	7	2008VIRO01	"Philippe Virouleau"
+555	273	5	2010KADD01	"Abdelhak Kaddour"
+
+666	53	2	2004GALL02	"Clément Gallet"
+666	36	2	2010BOUV01	"Pierre Bouvier"
+666	36	2	2008COUR01	"François Courtès"
+666	36	2	2010OLIV01	"Auguste Olivry"
+
+777	71	3	2008COUR01	"François Courtès"
+777	60	1	2008VIRO01	"Philippe Virouleau"
+777	35	1	2010KADD01	"Abdelhak Kaddour"
+777	35	1	2010OLIV01	"Auguste Olivry"
+
+clock	460	5	2007DUSS01	"Gaël Dusser"
+clock	418	8	2004GALL02	"Clément Gallet"
+clock	253	4	2010BOUV01	"Pierre Bouvier"
+
+magic	308	6	2007DUSS01	"Gaël Dusser"
+magic	295	4	2008ERBI01	"Guillaume Erbibou"
+magic	161	4	2007LEMO01	"Laetitia Lemoine"
+
+minx	420	5	2008VIRO01	"Philippe Virouleau"
+minx	356	9	2008COUR01	"François Courtès"
+minx	320	4	2008MORE02	"Hippolyte Moreau"
+
+mmagic	501	9	2004GALL02	"Clément Gallet"
+mmagic	300	3	2009LEFE01	"Quentin Lefebvre"
+mmagic	188	4	2007LEMO01	"Laetitia Lemoine"
+
+pyram	360	4	2010DESJ01	"Jules Desjardin"
+pyram	260	3	2009DOUS03	"Valentin Doussin"
+pyram	231	5	2010CULL01	"Victor Cullot"
+
+sq1	645	10	2008COUR01	"François Courtès"
+sq1	400	4	2008PIAU01	"Antoine Piau"
+sq1	290	5	2009PETI01	"Loïc Petit"

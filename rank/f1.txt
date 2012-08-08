@@ -1,0 +1,70 @@
+eventId	score	count	personId	personName
+222	127	7	2008VIRO01	"Philippe Virouleau"
+222	126	6	2008PIAU01	"Antoine Piau"
+222	69	5	2010ESTU01	"Rémi Esturoune"
+
+333	200	8	2008HANK01	"Kanneti Sae Han (คันธ์เนตี แซ่ห่าน)"
+333	111	6	2008PIAU01	"Antoine Piau"
+333	78	5	2006JACQ01	"Thibaut Jacquinot"
+
+333bf	167	11	2004GALL02	"Clément Gallet"
+333bf	136	6	2008MORE02	"Hippolyte Moreau"
+333bf	115	6	2008COUR01	"François Courtès"
+
+333fm	149	8	2004GALL02	"Clément Gallet"
+333fm	58	3	2009PETI01	"Loïc Petit"
+333fm	56	5	2008COUR01	"François Courtès"
+
+333ft	85	5	2008COUR01	"François Courtès"
+333ft	43	2	2010ESTU01	"Rémi Esturoune"
+333ft	43	2	2008MORE02	"Hippolyte Moreau"
+
+333mbf	93	4	2008COUR01	"François Courtès"
+333mbf	65	3	2008MORE02	"Hippolyte Moreau"
+333mbf	58	3	2004GALL02	"Clément Gallet"
+
+333oh	193	8	2008HANK01	"Kanneti Sae Han (คันธ์เนตี แซ่ห่าน)"
+333oh	113	6	2008PIAU01	"Antoine Piau"
+333oh	84	6	2007DUSS01	"Gaël Dusser"
+
+444	127	7	2008VIRO01	"Philippe Virouleau"
+444	120	6	2008PIAU01	"Antoine Piau"
+444	93	4	2008LEME01	"Pierre Lemerle"
+
+444bf	25	1	2008COUR01	"François Courtès"
+
+555	161	7	2008HANK01	"Kanneti Sae Han (คันธ์เนตี แซ่ห่าน)"
+555	131	7	2008VIRO01	"Philippe Virouleau"
+555	90	6	2008PIAU01	"Antoine Piau"
+
+666	20	2	2008COUR01	"François Courtès"
+666	18	2	2004GALL02	"Clément Gallet"
+666	16	2	2010OLIV01	"Auguste Olivry"
+
+777	30	3	2008COUR01	"François Courtès"
+777	18	1	2008VIRO01	"Philippe Virouleau"
+777	15	1	2010KADD01	"Abdelhak Kaddour"
+
+clock	129	8	2004GALL02	"Clément Gallet"
+clock	118	5	2007DUSS01	"Gaël Dusser"
+clock	73	4	2010BOUV01	"Pierre Bouvier"
+
+magic	92	6	2007DUSS01	"Gaël Dusser"
+magic	83	4	2008ERBI01	"Guillaume Erbibou"
+magic	56	4	2010DESJ01	"Jules Desjardin"
+
+minx	129	9	2008COUR01	"François Courtès"
+minx	111	5	2008VIRO01	"Philippe Virouleau"
+minx	86	4	2008MORE02	"Hippolyte Moreau"
+
+mmagic	152	9	2004GALL02	"Clément Gallet"
+mmagic	75	3	2009LEFE01	"Quentin Lefebvre"
+mmagic	65	4	2007LEMO01	"Laetitia Lemoine"
+
+pyram	93	4	2010DESJ01	"Jules Desjardin"
+pyram	76	5	2010CULL01	"Victor Cullot"
+pyram	68	3	2009DOUS03	"Valentin Doussin"
+
+sq1	192	10	2008COUR01	"François Courtès"
+sq1	100	4	2008PIAU01	"Antoine Piau"
+sq1	88	5	2009PETI01	"Loïc Petit"

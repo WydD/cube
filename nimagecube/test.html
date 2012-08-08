@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+	<head>
+		<title>M&eacute;thode de R&eacute;solution du Rubik's revenge a l'aveugle</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+		<meta name="Keywords" lang="fr" content="rubik's cube, rubicube, rubycube, rubbik's cube, cube, rubik, cyril castella, skewb, pyraminx, domino, puzzle, casse-t&ecirc;te, &eacute;nigme, solution, m&eacute;thode, fridrich" />
+		<meta name="description" content="Site de methodes simples pour finir les puzzles de type rubik's cube. Et si la solution du rubik's cube, c'&eacute;tait facile ?" />
+		<meta name="author" content="Cyril Castella, deadalnix, ofapel, Simon Blanchet" />
+
+		<script type="text/javascript" src="/js/include.js"></script>
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen" />
+		<!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="/css/styleie.css" media="screen" />
+		<![endif]-->
+		<!--[if lt IE 7]>
+			<link rel="stylesheet" type="text/css" href="/css/styleie6.css" media="screen" />
+			<script type="text/javascript" src="/js/ie6menu.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+﻿<h1>R&eacute;soudre le Rubik Revenge en blindfold</h1>
+
+<p>Contrairement &agrave; ce qu'il parrait, et comme on commence &agrave; en avoir l'habitude sur ce site, le blindfold est possible 
+sur un 4x4x4. Il faut pour ceci bien reconnaitre quelles sont les particularit&eacute;es du 4x4x4. Tout d'abord, les centres sont compos&eacute;s de 
+plusieurs pi&egrave;ces, et il est donc indispensable de conserver leur orientation, c'est &agrave; dire de ne pas les faire tourner sur eux meme. Si vous 
+choisissez d'utiliser d'autres algoritmes que ceux que nous vous proposons, pensez &agrave; bien v&eacute;rifier qu'ils ne posent pas de probl&egrave;mes 
+
+&agrave; ce niveau. Ensuite viennent les ar&ecirc;tes. Elles sont par groupe de deux ayant les m&ecirc;me couleurs, mais &ccedil;a n'est pas parce-qu'elles ont les 
+m&ecirc;mes couleurs qu'elles sont identiques. Cela va rendre le rep&eacute;rage un peu plus difficile car il faut &ecirc;tre vigilant, mais en fait cela va 
+aussi nous aider pendant la r&ecirc;solution. En effet, ce type de pi&egrave;ces se retrouve forcement bien orient&eacute; un fois plac&eacute;. Nous allons 
+vous expliquer cela en d&eacute;tail.</p>
+
+<p>La r&eacute;solution va se d&eacute;rouler comme suit :</p>
+
+<ol>
+	<li><a href="#coin">R&eacute;soudre les coins.</a></li>
+	<li><a href="#centre">R&eacute;soudre les centres.</a></li>
+	<li><a href="#ar&ecirc;te">R&eacute;soudre les ar&ecirc;tes.</a></li>
+        <li><a href="#plus">Formules en plus</a></li>
+
+        <li><a href="#memo">M&eacute;morisation</a></li>
+</ol>
+
+<p>Avant de commencer, rapellez vous qu'il n'y a aucun point fixe sur un revenge. Nous vous conseillons donc de le placer dans le sens o&ugrave; un maximum 
+de centres sont d&eacute;j&agrave; r&eacute;solus (c'est potentiellement la pi&egrave;ce qui pourra &ecirc;tre r&eacute;solue en plus grand nombre car chaques coins 
+a 4 positions correctes).</p>
+
+<hr class="clear" /><p class="mvtop">[<a href="#top">Haut de page</a>]</p><h2><a id="coin"></a>R&eacute;soudre les coins.</h2>
+
+<p>Pour r&eacute;soudre les coins, nous allons utiliser la m&eacute;thode d&eacute;crite dans la methode 3-cycles. Si vous n'&ecirc;tes pas familiaris&eacute;
+ avec une telle m&eacute;thode, mieux vaut que vous y travailliez un peu avant de vous remettre au Rubik Revenge. Concernant l'orientation des coins, rien de
+ particulier si vous vous limitez &agrave; utiliser des sunes et anti-sunes. Si vous souhaitez utiliser d'autres algoritmes, pensez &agrave; bien verifier 
+qu'ils ne font pas tourner les centres sur eux m&ecirc;mes. Nous allons, tout comme sur le 3x3x3, interdire les mouvements L, L', R, R', F, F' B, B' dans P. Il n'y aura 
+pas d'interdiction de ce genre sur les autres &eacute;tapes.</p>
+
+<p>Pour r&eacute;soudre les permutations de coins, nous allons vous proposer un set d'algo permettant de r&eacute;soudre le cube sans probl&egrave;me majeur :</p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=CL.R2D2R'U'RD2R'UR'CR" />CL.R2D2R'U'RD2R'UR'CR</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=CL.RU'RD2R'URD2R2CR" />CL.RU'RD2R'URD2R2CR</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=(RB'R'B)3" />(RB'R'B)3</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=CL.R2D2R'U'RD2R'UR' L'UL'D2LU'L'D2L2CR" />CL.R2D2R'U'RD2R'UR' L'UL'D2LU'L'D2L2CR</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=CL.RU'RD2R'URD2R2 L2D2LUL'D2LU'LCR" />CL.RU'RD2R'URD2R2 L2D2LUL'D2LU'LCR</div>
+
+<hr class="clear" />
+
+<p>Il est possible que vous n'ayez que deux coins &agrave; &eacute;changer &agrave; la fin. Dans ce cas, utilisez la derni&egrave;re passe afin de les 
+mettre en UFR et UBR. Ceci afin de ne pas avoir &agrave; garder ce point en t&ecirc;te pendant toute la r&eacute;solution. Il vous suffit de vous rappeler 
+si oui ou non vous avez rencontr&eacute; un probl&egrave;me de parit&eacute; sur les coins, et de le r&eacute;soudre &agrave; la fin comme on va le voir.</p>
+
+<hr class="clear" />
+
+<hr class="clear" /><p class="mvtop">[<a href="#top">Haut de page</a>]</p><h2><a id="centre"></a>R&eacute;soudre les centres.</h2>
+
+<p>Pour r&eacute;soudre les centres, on va utiliser des cycles. Etant donn&eacute; que chaques coins a plusieurs positions possibles, faites vous plaisir, 
+choississez vos cycles de fa&ccedil;on &agrave; ce qu'ils soient faciles. Vous allez ensuite pouvoir les r&eacute;soudre avec ce qui suit :</p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=MRU'ML'UMR'U'MLU" />MRU'ML'UMR'U'MLU</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=UMRU'ML'UMR'U'ML" />UMRU'ML'UMR'U'ML</div>
+
+<hr class="clear" />
+
+<p>Il ne faut pas oublier que les sym&eacute;tries sont aussi possibles et parfois utiles.</p>
+
+<hr class="clear" />
+
+<hr class="clear" /><p class="mvtop">[<a href="#top">Haut de page</a>]</p><h2><a id="ar&ecirc;te"></a>R&eacute;soudre les ar&ecirc;tes.</h2>
+
+<p>Ici, rien de tr&egrave;s compliqu&eacute; sinon le rep&eacute;rage. Vous pouvez les r&eacute;soudre comme suit :</p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=TRUR'U'MR'URU'R'" />TRUR'U'MR'URU'R'</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=RUR'U'MRURU'TR'" />RUR'U'MRURU'TR'</div>
+
+<hr class="clear" />
+
+<p>Il se peut que vous ayez des cycles de longueur 2. Vous pouvez les r&eacute;soudre mais la facon present&eacute;e ci-dessous m&eacute;lange les centres. Il est 
+donc important de ne pas les d&eacute;faires avec notre passe "P", ce qui aurait comme cons&eacute;quence de m&eacute;langer les centres &agrave; 
+
+l'application de P<sup><small>-1</small></sup>. Le dernier cas est un exemple o&ugrave; la passe P modifie les centres. Il faut donc appliquer une autre 
+passe (3<sup><small>eme</small></sup> applet), qui remet les centres en ordre pour s'en sortir, avant de faire P<sup><small>-1</small></sup>. dans cet exemple, la passe P est MR'.</p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=MRU2'MRU2'CR.U2'MRU2'CL.ML'U2MLU2'MR2" />MRU2'MRU2'CR.U2'MRU2'CL.ML'U2MLU2'MR2</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=CR'MR2U2CR.U2MLU2MR'U2MRU2CR.U2MRU2ML'D2MR2CR'" />CR'MR2U2CR.U2MLU2MR'U2MRU2CR.U2MRU2ML'D2MR2CR'</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=LRU2L'R'ULRU2L'R'U" />LRU2L'R'ULRU2L'R'U</div>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=MR'CR'MR2U2CR.U2MLU2MR'U2MRU2CR.U2MRU2ML'D2MR2CR'L'R'U2RLU'L'R'U2RLU'MR" />MR'CR'MR2U2CR.U2MLU2MR'U2MRU2CR.U2MRU2ML'D2MR2CR'L'R'U2RLU'L'R'U2RLU'MR</div>
+
+<hr class="clear" />
+
+<p>Une toute derni&egrave;re mise en garde concernera vos passes. Si vous utilisez des mouvements de couronnes externes, il n'y aura pas de probl&egrave;me. Mais vous serez peut &ecirc;tre 
+amen&eacute;s &agrave; utiliser des mouvements de tranches interm&eacute;diaires. Faites alors attention &agrave; ce que vos formules ne retournent pas les centres ou ils se 
+m&eacute;langeront. Pour &eacute;viter cel&agrave;, il faudra alors effectuer la 3<sup><small>eme</small></sup> formule avant d'effectuer P<sup><small>-1</small></sup></p>
+
+<p>Il nous reste un petit d&eacute;tail &agrave; r&eacute;gler. Vous vous rappellez du probl&egrave;me de parit&eacute; avec les coins ? Et bien c'est ici 
+qu'on va le r&eacute;soudre. Notez que vous pouvez le r&eacute;soudre au debut comme &agrave; la fin de la r&eacute;solution des ar&ecirc;tes. Deadal.Nix le fait 
+&agrave; la fin sur la vid&eacute;o de d&eacute;monstration, mais il est pr&eacute;f&eacute;rable de le faire au debut pour minimiser les risques d'erreur. 
+Voici comment vous en sortir :</p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=RUR'U'R'FR2U'R'U'RUR'F'TUTDTR2U2MR2U2TR2TD'TU'" />RUR'U'R'FR2U'R'U'RUR'F'TUTDTR2U2MR2U2TR2TD'TU'</div>
+
+<hr class="clear" />
+
+<hr class="clear" /><p class="mvtop">[<a href="#top">Haut de page</a>]</p><h2><a id="plus"></a>Formules en plus</h2>
+
+<p>Voici maintenant quelques formules int&eacute;ressantes mais pas indispensables. Vous pourrez tr&egrave;s bien r&eacute;soudre votre cube avec les formules
+ mentionn&eacute;es plus haut. Nous nous sommes d'ailleurs pos&eacute;s la question de diffusion ou non-diffusion de ce qui suit. En effet, on avait peur d'embrouiller
+ notre lecteur, c'est &agrave; dire vous. Cependant, ces formules peuvent &ecirc;tre tr&egrave;s utiles dans certains cas.</p>
+
+<p>Comme &agrave; l'accoutum&eacute;, retenez bien que chacunes de ces formules poss&egrave;dent une sym&eacute;trie que nous vous laisseront le soin de 
+d&eacute;duire.</p>
+
+<p>Pour les ar&ecirc;tes : </p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=TLUL'U'ML'ULU'L'CD.L'U'LUML'U'L'UTL" />TLUL'U'ML'ULU'L'CD.L'U'LUML'U'L'UTL</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=(TLTRD2TL'TR'U)2" />(TLTRD2TL'TR'U)2</div>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=B' D2' R' D R MD R' D' R MD' D2' B" />B' D2' R' D R MD R' D' R MD' D2' B</div>
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=F'  R' MU' R U2 R' MU R U2  F" />F'  R' MU' R U2 R' MU R U2  F</div>
+
+<hr class="clear" />
+
+<p>Pour les centres : </p>
+
+<div class="vignette"><img src="imagecube_final.php?size=4&algo=MRTU'ML'TUMR'TU'MLTU" />MRTU'ML'TUMR'TU'MLTU</div>
+
+<hr class="clear" />
+
+
+<h1>Professeur !</h1>
+<div class="vignette">
+
+	<img src="imagecube_final.php?size=5&algo=M1L MR' D M1L' D' MR D M1L D' M1L'" />M1L MR' D M1L' D' MR D M1L D' M1L'
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1R' MR' D' M1R D ML' D' M1R' D M1R" />M1R' MR' D' M1R D ML' D' M1R' D M1R
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L D M1L'D' MR' D M1L D' MR M1L'" />M1L D M1L'D' MR' D M1L D' MR M1L'
+</div>
+
+<hr class="clear" />
+
+<p>Et pour les autres centres:</p>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L M1R' D M1L' D' M1R D M1L D' M1L'" />M1L M1R' D M1L' D' M1R D M1L D' M1L'
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L M1R' D' M1R D M1L' D' M1R' D M1R" />M1L M1R' D' M1R D M1L' D' M1R' D M1R
+</div>
+
+<hr class="clear"/>
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L D M1L' D' M1R' D M1L D' M1R M1L'" />M1L D M1L' D' M1R' D M1L D' M1R M1L'
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1R' D' M1R D M1L D' M1R' D M1R M1L'" />M1R' D' M1R D M1L D' M1R' D M1R M1L'
+</div>
+
+<hr class="clear" />
+
+<p>Bien sûr, on peut combiner les 2 et avoir:</p>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L MR'M1R' D M1L' D' MR M1R D M1L D' M1L'" />M1L MR'M1R' D M1L' D' MR M1R D M1L D' M1L'
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L MR' M1R' D' M1R D MR M1L' D' M1R' D M1R" />M1L MR' M1R' D' M1R D MR M1L' D' M1R' D M1R
+</div>
+
+<hr class="clear"/>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1L D M1L' D' M1R' MR' D M1L D' M1R MR M1L'" />M1L D M1L' D' M1R' MR' D M1L D' M1R MR M1L'
+
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1R' D' M1R D M1L MR' D' M1R' D M1R MR M1L'" />M1R' D' M1R D M1L MR' D' M1R' D M1R MR M1L'
+</div>
+
+<hr class="clear" />
+
+<p>Pour passer des centres d'une face à son opposée:</p>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1R2 M1U2 M1R2 M1U2" />M1R2 M1U2 M1R2 M1U2
+
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1R2 MU2 M1R2 MU2" />M1R2 MU2 M1R2 MU2
+</div>
+
+<hr class="clear"/>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=(M1R2 U' M1L2 U)2" />(M1R2 U' M1L2 U)2
+</div>
+
+<div class="vignette">
+
+	<img src="imagecube_final.php?size=5&algo=(M1R2 U' MR2 U)2" />(M1R2 U' MR2 U)2
+</div>
+
+<div class="vignette">
+	<img src="imagecube_final.php?size=5&algo=M1R2 M1U2 M1R2 M1U2 F' M1R2 M1U2 M1R2 M1U2 F" />M1R2 M1U2 M1R2 M1U2 F' M1R2 M1U2 M1R2 M1U2 F
+</div>
+
+
+<h2>Youpla Tredge</h2>
+	<img src="imagecube_final.php?size=5&algo=TD R U R' F R' F' R TD'" />TD R U R' F R' F' R TD'
+
+	</body>
+</html>
+

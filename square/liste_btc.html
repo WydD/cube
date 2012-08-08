@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>Méthode avancée Square-1 : Liste des BTC</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<style type="text/css">
+<!--
+        .sequence {
+            color: #ff0000;
+            font-style: italic;
+            font-family: "Arial"
+        }
+        .btc {
+            padding: 5px;
+            border: 2px solid black;
+        }
+-->
+    </style>
+</head>
+<body>
+<h1>Square-1 : méthode de résolution avancée</h1>
+<h2>Les Back To Cube (BTC) classiques</h2>
+<h3>Les cas très simples (2 flips max)</h3>
+<p>Quand vous aurez un de ces cas, vous pouvez vous réjouir d'avoir un BTC qui peut prendre moins de 1s. Voici le premier :</p>
+<img class="btc" src="btc.php?sequence=/"/>
+<p>Attention, le prochain est traître. Repérez bien le fait que les deux étage ne sont pas les mêmes (l'un a la partie séparée à gauche et l'autre à droite du bloc). Si ce n'est pas le cas c'est que c'est un des plus long à résoudre (6 flips). </p>
+<img class="btc" src="btc.php?sequence=/(-3,0)/"/>
+<p>Ce prochain cas a l'avantage de se repérer très rapidement et n'a aucune confusion dû à sa symétrie évidente.</p>
+<img class="btc" src="btc.php?sequence=/(3,3)/"/>
+<h3>Les cas habituels (3 flips)</h3>
+<p>Beaucoup de cas se réduisent à ce prochain du fait de ces deux indépendant qui peuvent être fabriqués de différentes manières. Si vous avez un doute et si vous avez quelques arêtes indépendantes, visez celui-ci !</p>
+<img class="btc" src="btc.php?sequence=/(-1,-2)/(-3,0)/"/>
+<p>Celui-ci permet d'avoir des résolutions très rapides sur des cas que l'on croyait perdus d'avance. Voir les ruses plus loin.</p>
+<img class="btc" src="btc.php?sequence=/(-1,0)/(-3,0)/"/>
+<p>Rarement réduit car trop complexe niveau de sa forme mais il permet de résoudre rapidement le cas échéant.</p>
+<img class="btc" src="btc.php?sequence=/(-3,0)/(-3,0)/"/>
+<p>Dans les cas où il n'y a que des blocs de 2, il y a deux BTC à viser, celui-ci et le prochain. En deux flips maximum, il est possible des les retrouver. La fin est très rapide à exécuter.</p>
+<img class="btc" src="btc.php?sequence=/(-1,0)/(-3,-3)/"/>
+<img class="btc" src="btc.php?sequence=/(-1,-2)/(-3,-3)/"/>
+<p>La double raquette n'est pas toujours utilisée en réduction, pourtant elle permet de trouver des raccourcis de cas complexes.</p>
+<img class="btc" src="btc.php?sequence=/(-1,4)/(-3,0)/"/>
+<h3>Exemples classiques de réductions</h3>
+<img class="btc" src="btc.php?end=1&sequence=/(-4,3)/(-1,-2)/(-3,0)/"/>
+<img class="btc" src="btc.php?end=1&sequence=/(-4,0)/(-1,4)/(-3,0)/"/>
+<img class="btc" src="btc.php?end=1&sequence=/(-2,0)/(-1,-2)/(-3,0)/"/>
+<img class="btc" src="btc.php?end=2&sequence=/(0,2)/(-2,0)/(-1,-2)/(-3,0)/"/>
+<p>Le cas suivant est vil car c'est aussi des cas qui semblent faciles (carré plus un bloc, double raquettes) mais ils sont éloignés de 5 ou 6 flips de l'état résolu. </p>
+<img class="btc" src="btc.php?end=3&sequence=/(-4,-4)/(-1,0)/(-2,-2)/(0,1)/(3,3)/"/>
+<p>Il y a une discussion complète sur ce dernier cas, la double fausses-raquettes peut se résoudre avec le premier de réduction que j'ai présenté ; à vous de le trouver par exercice. Suivant l'alignement du cube à la base, différentes approches peuvent être faites. Ensuite, j'ai ici choisi de revenir au cas "4 blocs de 2", alors que le double bouclier était possible. Là, c'est avant tout parce que l'alignement me fournit un (-1,0)/(-2,-2) ce qui est très facile à faire. </p>
+<h3>En bonus</h3>
+<p>Le cas le plus long se résout de façon extrêmement rapide car il ne nécessite que la face supérieure.</p>
+<img class="btc" src="btc.php?sequence=/(-1,0)/(2,0)/(-2,0)/(2,0)/(-1,0)/(-3,0)/"/>
+<p>C'est une merveilleuse réduction au cas "U" (double bloc de 2 et carré). Notez encore une fois que l'ensemble des sous-étapes est un BTC et qu'elle permet de trouver deux très bonnes réductions sur les 4 premiers mouvements.</p>
+
+<h2>Pour aller plus loin</h2>
+<p>Si vous voulez aller plus loin que les cas dans cette page, il existe un outil que j'ai créé qui donne les solutions optimales pour chacune des configurations. <a href="../optimbtc/">Disponible ici</a></p>
+</body>
+</html>

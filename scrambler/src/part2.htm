@@ -1,0 +1,51 @@
+</script>
+</head>
+<body style="font-family:Arial">
+<table border="0" width="100%">
+    <tr>
+        <td id="puzzle" width="50%"><h1>Puzzle : <form method="get" action="#"><select name="type" id="type">
+            <option value="2">2x2x2</option>
+            <option value="3" selected="selected">3x3x3</option>
+            <option value="4">4x4x4</option>
+            <option value="5">5x5x5</option>
+            <option value="6">6x6x6</option>
+            <option value="7">7x7x7</option>
+            <option value="-1">Clock</option>
+            <option value="-2">Megaminx</option>
+            <option value="-3">Square-1</option>
+            <option value="-4">Pyraminx</option>
+        </select></form></h1></td>
+        <td width="50%" align="right">
+            <h1>Simple WCA-Approved Scrambler</h1>
+        </td>
+    </tr><tr><td colspan='2' id="desc" align="center">&nbsp;</td></tr>
+</table>
+<table id="scrambletab" border=0 cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+        <td id="scramblestring" style="font-family:courier,serif;"></td>
+        <td id="scrambleimage" align="right"></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    jPlex.include('jplex.xprototype.*');
+    document.bindKey(Event.Key.SPACE, next);
+    $('type').observe('change', next);
+    $('scrambletab').observe('click', next);
+
+    jPlex.include('scrambles.ScrambleFactory');
+    function next() {
+        type = parseInt($F('type'));
+        //alert(type);
+        var scr = ScrambleFactory.get(type);
+        $("desc").update(scr.description());
+        scr.scramble();
+        $('scramblestring').update("<h1>" + scr.scramblestring() + "</h1>");
+        $('scrambleimage').update(scr.imagestring());
+    }
+    next();
+</script>
+
+<div style="text-align:center; width:100%; font-size:2em;">Press SPACE bar to re-scramble</div><br/>
+<div style="text-align:center; width:100%;">Written by Loic Petit (tls.wydd ~a~ free dot fr)<br/><a href="http://jplex.googlecode.com">Powered by jPlex</a></div>
+</body>
+</html>

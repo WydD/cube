@@ -1,0 +1,407 @@
+<html>
+	<head>
+		<title>Randomizer</title>
+		<script type="text/javascript" src="raphael-min.js"></script>
+		<script type="text/javascript" src="solver.js"></script>
+		<script type="text/javascript" src="cxll.js"></script>
+		<script type="text/javascript" src="cllef.js"></script>
+		<script type="text/javascript" src="coll.js"></script>
+		<script type="text/javascript">
+		<!--
+var colors = {'y': "yellow",
+    'b': "blue",
+    'r': "red",
+    'w': "white", 
+    'g': "green", 
+    'o': "#ffA040",
+    'p': "purple", 
+    '0': "gray"
+};
+var colorscheme = ['y','g','r','b','o','w'];
+var oll = {
+	a: {v:[1,1,0,1], auf:0, name: "Anti-Sune"},
+	l: {v:[0,2,0,1], auf:0, name: "L"},
+	t: {v:[1,2,0,0], auf:0, name: "T"},
+	p: {v:[1,1,2,2], auf:0, name: "Pi"},
+	h: {v:[2,1,2,1], auf:0, name: "H"},
+	u: {v:[2,1,0,0], auf:0, name: "U"},
+	n: {v:[0,0,0,0], auf:0, name: "Skip"},
+	s: {v:[2,2,2,0], auf:0, name: "Sune"}
+};
+var plls = [[0,1,2,3],[0,3,2,1],[0,2,1,3],[0,1,3,2],[3,1,2,0],[1,0,2,3]];
+function colorRect(rect, c, i, j) {
+	if( c !== false ) {
+		if(c instanceof Array) 
+			c = c[i][j];
+		if(c > 5) c = '0';
+		else c = colorscheme[onTopScheme[currentColorOnTop][c]];
+	} else c = '0'
+	rect.attr("fill", colors[c]);
+}
+function fillRect(rect, c, i, j, scale) {
+	colorRect(rect, c, i, j);
+	rect.attr("stroke-width", 5*scale);
+	rect.attr("stroke", "#000");
+	return rect;
+}
+var pos = [[10,50], [50,10], [150,10], [260,50], [260,150], [150,260], [50,260], [10,150]];
+function buildRect(paper, c, i, j, scale) {
+	var rect;
+	if(j == 0) {
+		rect = paper.rect(
+			(50+100*((i+Math.floor(i/2))%2))*scale, 
+			(50+100*Math.floor(i/2))*scale, 
+			100*scale, 100*scale,
+			4*scale);
+	} else {
+		rect = paper.rect(
+			pos[i*2+j-1][0]*scale, 
+			pos[i*2+j-1][1]*scale, 
+			((i+j)%2 == 0 ? 100 : 30)*scale, 
+			((i+j)%2 == 1 ? 100 : 30)*scale,
+			4*scale);
+	}
+	return fillRect(rect, c, i, j, scale);
+}
+function shift(array,n) {
+	var s = array.length;
+    var newarray = new Array(s);
+    var j = n;
+    for(var i = 0 ; i < s ; i++) {
+    	newarray[j] = array[i];
+    	j = (j+1)%s;
+    }
+    return newarray;
+}
+var paper;
+var drawnCube = [];
+var cube;
+function drawOLL(o,auf) {
+	if(auf)
+		oll[o].auf = (oll[o].auf+auf)%4;
+	document.getElementById("draw-"+o).innerHTML=" ";
+	var draw = Raphael("draw-"+o, 100, 100);
+	var drawoll = [[0, 6, 6], [0, 6, 6], [0, 6, 6], [0, 6, 6]];
+	for(var i = 0 ; i < drawoll.length ; i++) {
+		drawoll[i] = shift(drawoll[i], oll[o].v[(i+4-oll[o].auf)%4]);
+		for(var j = 0 ; j < 3 ; j++) {
+			buildRect(draw, drawoll, i, j, 1/3);
+		}
+	}
+	draw.safari();
+}
+function drawOLLs() {
+	var list = ['h', 'p', 'u', 't', 'l', 's', 'a', 'n'];
+	var elt = document.getElementById('olls');
+	elt.innerHTML = "";
+	for(var n = 0 ; n < list.length ; n++) {
+		var o = list[n];
+		elt.innerHTML = elt.innerHTML + "<div class=\'oll\' id=\'oll-" + o + "\'><div onClick=\'drawOLL(\""+o+"\",1);\' id=\'draw-" + o + "\'></div><label><div width=\"100%\"><input type=\'checkbox\' id=\'case\' value=\'" + o + "\' checked=\'checked\' onClick=\'regenCases();\' onfocus=\'this.blur()\'/><br/>"+oll[o].name+"</div></label></div>"; // ' 
+		setTimeout("drawOLL(\""+o+"\",0)",1);
+	}
+	regenCases();
+}
+function setHidden(hideFace,face) {
+	if(face == 'b') {
+		hideFace[0*4+2] = true;
+		hideFace[1*4+1] = true;
+	} else if(face == 'l') {
+		hideFace[3*4+2] = true;
+		hideFace[0*4+1] = true;
+	} else if(face == 'r') {
+		hideFace[1*4+2] = true;
+		hideFace[2*4+1] = true;
+	} else if(face == 'f') {
+		hideFace[2*4+2] = true;
+		hideFace[3*4+1] = true;
+	}
+}
+function testIdent(pll) {
+	var j = pll[0];
+	for(var i = 1 ; i < pll.length ; i++) {
+		if((j+1)%pll.length == pll[i])
+			j = pll[i];
+		else
+			return false;
+	}
+	return true;
+}
+var cases;
+var manualPLL;
+var manualOLL;
+function regenCases() {
+	var formCase = document.forms[0]["case"];
+	cases = new Array();
+	for(var i = 0 ; i < formCase.length ; i++) {
+		if(formCase[i].checked) cases.push(formCase[i].value);
+	}
+	manualPLL = 0;
+	manualOLL = 0;
+}
+function aufstring(auf) {
+	switch(auf) {
+		case 0: return "";
+		case 1: return "U";
+		case 2: return "U2";
+		case 3: return "U'";
+	}
+}
+function draw22(schemechange) {
+	if(!paper || schemechange) {
+		colorscheme = document.forms[0]["colorscheme"].value.split('');
+		drawOLLs();
+		if(!paper)
+			paper = Raphael("cube", 300, 300);
+	}
+	if(document.forms[0]['randomcolor'].checked) {
+		currentColorOnTop = Math.floor(Math.random()*6);
+		colorRect(colorOnTop, 0, 0, 0);
+		colorRect(colorOnFront, 1, 0, 0);
+	}
+	var type = document.forms[0]['type'].value;
+	
+	var hide = document.forms[0]["hide"];
+	var hideFace = {};
+	for(var i = 0 ; i < hide.length ; i++) {
+		if(!hide[i].checked) {
+			setHidden(hideFace, hide[i].value);
+		}
+	}
+	
+	var showoll = document.forms[0]["showoll"].checked;
+	
+	/* Random section */
+	var o;
+	var p;
+	var mode = document.forms[0]['mode'].value;
+	if(mode == 0) {
+		o = cases[Math.floor(Math.random()*cases.length)];
+		if((type == 0 || type >= 3) && o == 'n') // cll -> do not LL skip
+			p = Math.floor(Math.random()*(plls.length-1))+1;
+		else 
+			p = Math.floor(Math.random()*plls.length);
+	} else {
+		o = cases[manualOLL];
+		if(o == 'n' && manualPLL == 0 && (type == 0 || type >= 3)) manualPLL++;
+		p = manualPLL++;
+		if(manualPLL >= plls.length || o == 'h' && manualPLL >= 4 || o == 'n' && manualPLL >= 3) {
+			manualPLL = 0;
+			if(++manualOLL >= cases.length)
+				manualOLL = 0;
+		}
+	}
+	var premove = Math.floor(Math.random()*4);
+	
+	var selectedOLL = oll[o].v;
+	var auf;
+	if(document.forms[0].auf.checked)
+		auf = Math.floor(Math.random()*selectedOLL.length);
+	else
+		auf = oll[o].auf;
+	/* Things are deterministic from here */
+	
+	selectedOLL = shift(selectedOLL, auf);
+		//ygrbow
+	cube = [[0, 2, 3], [0, 3, 4], [0, 4, 1], [0, 1, 2]];
+	var origpll = [0,1,2,3];
+
+	origpll = shift(origpll, premove); // random pre-u-move
+	var pll = Array(4);
+	for(var i = 0 ; i < pll.length ; i++) {
+		pll[plls[p][i]] = origpll[i];
+	}
+	pll = shift(pll, auf);
+	
+	newcube = [];
+	var init = drawnCube.length != cube.length;
+	for(var i = 0 ; i < cube.length ; i++) {
+		pll[4+i] = 4+i;
+		selectedOLL[4+i] = 0;
+		if(init) drawnCube[i] = [];
+		newcube[i] = shift(cube[pll[i]], selectedOLL[i]);
+		for(var j = 0 ; j < 3 ; j++) {
+			if(init) drawnCube[i][j] = buildRect(paper, false, i, j, 1);
+			colorRect(drawnCube[i][j], hideFace[i*4+j] && (newcube[i][j] != 0 || !showoll) ? false : newcube, i, j);
+		}
+	}
+
+	if(!document.forms[0]['gen'].checked) {
+		document.getElementById("generator").innerHTML = "";
+		return;
+	}
+	if(type >= 3) {
+		// CxLL 
+		// premove, o, p, auf
+		var arr = type == 3 ? cxll : type == 4 ? coll : cllef;
+		var gen = arr[o][p].gen;
+		var pm = (arr[o][p].premove + premove)%4;
+		var genauf = (auf+arr[o][p].auf)%4;
+		var solved = aufstring(pm)+" "+gen+" "+aufstring(genauf);
+		document.getElementById("generator").innerHTML = "<h1>"+solved+"</h1>";
+		return;
+	}
+	
+	if(type == 1) {
+		pll[7] = 4; pll[4] = 7;
+	} else if(type == 2) {
+		pll[4] = 6; pll[6] = 4;
+	}
+
+	// Convert to face format
+	// Mapping from permutation/orientation to facelet
+	var D = 1, L = 2, B = 5, U = 4, R = 3, F = 0;
+	// D 0 1 2 3  L 4 5 6 7  B 8 9 10 11  U 12 13 14 15  R 16 17 18 19  F 20 21 22 23
+	// Map from permutation/orientation to face
+	var fmap = [[ U,  L,  B],[ U,  B,  R],[ U,  R,  F],[ U,  F,  L],[ D,  F,  R],[D,  R,  B],[ D,  B,  L],[ D,  L,  F]];
+	// Map from permutation/orientation to facelet identifier
+	var pos  = [[12,  5,  8],[13,  9, 17],[15, 16, 21],[14, 20,  4],[ 3, 23, 18],[1, 19, 11],[ 0, 10,  7],[ 2,  6, 22]];
+	// Convert cubie representation into facelet representaion
+	for(var i = 0; i < 8; i++){
+		for(var j = 0; j < 3; j++)
+			posit[pos[i][(selectedOLL[i] + j) % 3]] = fmap[pll[i]][j];
+	}
+	document.getElementById("generator").innerHTML = "<h1>"+solve()+"</h1>";
+}
+var onTopScheme = [[0,1,2,3,4,5], //ygrbow 
+	[1,4,5,2,0,3],
+	[2,1,5,3,0,4], 
+	[3,2,5,4,0,1], 
+	[4,3,5,1,0,2],
+	[5,1,4,3,2,0]];
+var colorOnTop;
+var colorOnFront;
+var currentColorOnTop = 0;
+window.onload = function() {
+	var colorCanvas = Raphael("colorcanvas",75,75);
+	colorOnTop = colorCanvas.rect(4, 4, 68, 68, 4);
+	fillRect(colorOnTop, currentColorOnTop, 0, 0, 1);
+	document.getElementById("colorcanvas").onclick = function() {
+		currentColorOnTop = (currentColorOnTop+1)%6;
+		colorRect(colorOnTop, 0, 0, 0);
+		colorRect(colorOnFront, 1, 0, 0);
+		drawOLLs();
+		document.forms[0]['randomcolor'].checked = false;
+	};
+	
+	var colorCanvas2 = Raphael("colorcanvas2",25,25);
+	colorOnFront = colorCanvas2.rect(1, 1, 23,23, 2);
+	fillRect(colorOnFront, 1, 0, 0, 0.2);
+	
+	draw22();
+	document.getElementById("cube").onclick = function() {
+		draw22(0);
+	};
+	document.getElementById("generator").onclick = function() {
+		draw22(0);
+	};
+	var elts = document.forms[0].elements;
+ 	for(var i=0 ; i < elts.length ; i++) {
+ 		if(elts[i].type == 'checkbox')
+ 		elts[i].onfocus = function() { this.blur() };
+ 	}
+ 	document.forms[0]["colorscheme"].hasFocus = false;
+}
+window.onkeydown = function(e) {
+	if(e.keyCode==32 && !document.forms[0]["colorscheme"].hasFocus) {
+		draw22();
+		return false;
+	}
+};
+		-->
+		</script>
+		<style type="text/css"><!--
+#tablebase tr {
+	height: 40px;
+	text-align: right;
+}
+#tableoll tr {
+	text-align: center;
+}
+#canvas, #olls, #colorselect {
+	display:inline-block; vertical-align:middle;
+}
+#canvas > div { 
+	vertical-align:middle;
+	display:inline-block;
+	border: 1px solid black;
+	text-align: center;
+}
+#canvas {
+	margin-left: 20px;
+}
+#olls {
+	width: 400px;
+	text-align: center;
+}
+#colorselect {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+#colorcanvas {
+	display:block;
+	
+}
+.oll {
+	display:inline-block;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+--></style> 
+	</head>
+	<body>
+		<form onsubmit="document.forms[0]['colorscheme'].blur(); return false;">
+			<div style="text-align:center;float:left;">
+			<div id="canvas"><table border="0" cellspacing="0"><tr><td colspan="3" align="center"><input type="checkbox" name="hide" value="b" checked="checked"/></td></tr>
+			<tr><td valign="center"><input type="checkbox" name="hide" value="l" checked="checked"/></td><td><div id="cube"></div></td><td><input type="checkbox" name="hide" value="r" checked="checked"/></td></tr>
+			<tr><td colspan="3" align="center"><input type="checkbox" name="hide" value="f" checked="checked"/></td></tr></table></div>
+			
+			<div id="colorselect">
+			U<div id="colorcanvas"></div><label><input type="checkbox" name="randomcolor"/><br/>Random</label><br/><br/>F<div id="colorcanvas2"></div>
+			</div>
+			
+			<div id="olls">
+			
+			</div>
+			<div id="generator" style="font-family:courier,serif;"> </div>
+		
+			
+			<p>
+	<label>Randomize AUF: <input type="checkbox" name="auf" checked="checked" /></label>&nbsp;&nbsp;&nbsp;&nbsp;
+	<label>Generator: <input type="checkbox" name="gen" onClick="draw22()" checked="checked"/></label>
+	<span id="typebox">&nbsp;&nbsp;&nbsp;&nbsp;
+		Type: <select name="type" onChange="draw22(); this.blur();">
+					<option value="0" selected="selected">cll</option>
+					<option value="1">eg-1</option>
+					<option value="2">eg-2</option>
+					<option value="3">cxll</option>
+					<option value="4">coll</option>
+					<option value="5">cllef</option>
+				</select>
+	</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	Mode: <select name="mode" onChange="draw22(); this.blur();">
+					<option value="0" selected="selected">random</option>
+					<option value="1">loop</option>
+				</select>&nbsp;&nbsp;&nbsp;&nbsp;
+	<label>Always show OLL: <input type="checkbox" name="showoll" checked="checked"/></label>&nbsp;&nbsp;&nbsp;&nbsp;
+	Scheme: <input type="text" name="colorscheme" value="ygrbow" size="5" onChange="if(this.value.length == 6) draw22(1); return false;" onFocus="this.hasFocus=true;" onBlur="this.hasFocus=false;"/>
+	</p>
+			</div></form>
+		<div style="padding-top:1em;clear:both;"></div>
+		<h2>Random 2x2 LL Generator</h2>
+		Manual: 
+		<ul><li>To scramble: click on the cube drawing, or click on the generator, or press space.</li>
+		<li>Select your pratice sub-group(s) by checking the boxes under the OLL shapes.</li>
+		<li>Select your LL type (cll, eg-1, eg-2) to have the correct generator.</li>
+		<li>Click on the OLL shapes to select your default AUF.</li>
+		<li>Uncheck <em>Randomize AUF</em> to have the OLL shapes aligned as selected (random premove is applied though).</li>
+		<li>Click on the U colorbox to choose your top face. Randomize it by clicking on the checkbox.</li>
+		<li>Select your training mode: <em>random</em> or <em>loop</em> (cycles through the LLs).</li>
+		<li>Click on the cube checkboxes to hide faces.</li>
+		<li>When a face is hidden, the OLL is displayed only if the option <em>Always show OLL</em> is checked.</li>
+		<li>To use a custom scheme (japanese for instance): manually enter the scheme (UFLBRD) and press enter.</li>
+		</ul>
+		<p><font size="2">made by Loic Petit, 2012. Cube rendering powered by <a href="http://www.raphaeljs.com">raphaeljs</a>. <br/>
+		Solver powered by the <a href="http://www.worldcubeassociation.org/regulations/scrambles/scramble_cube_222.html">WCA</a> (Tom van der Zanden, Jaap Scherphuis). CxLL generators by Quentin Lefebvre. COLL/CLLEF generators by Guillaume Erbibou. <br/>
+		Awesome tools used in the background: <a href="http://cube.crider.co.uk/algtrans.html">Algorithm Translator</a> by Conrad Rider. <a href="http://www.speedsolving.com/wiki/index.php/ACube">ACube</a> by Josef Jelinek.</font></p>
+	</body>
+</html>

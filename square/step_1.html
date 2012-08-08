@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>Méthode avancée Square-1 : Etape 1, retour au cube</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
+<!--
+        .sequence {
+            color: #ff0000;
+            font-style: italic;
+            font-family: "Arial"
+        }
+        .btc {
+            padding: 5px;
+            border: 2px solid black;
+        }
+-->
+    </style>
+</head>
+<body>
+<div style="float: right;"><a href="step_2.html">Étape suivante</a></div>
+<h1>Square-1 : méthode de résolution avancée</h1>
+<div style="clear:both;"/>
+<h2>Première étape : Le retour au cube</h2>
+<ul><li><a href="liste_btc.html">Voir des exemples de BTC</a></li></ul>
+<p>Le but de l'étape est d'arriver à obtenir une forme carrée aux deux étages du Square-1 (la tranche du milieu n'a pas besoin de l'être absolument). On appelle souvent cette étape le BTC (back to cube). Cette étape peut descendre à terme facilement en dessous des 5 secondes, toutefois pour un niveau intermédiaire 10 secondes restent acceptables.</p>
+
+<p>Il existe plusieurs méthodes pour ce faire. Une des plus simple est de mettre toutes les arêtes sur la face du haut. Cette manipulation est assez intuitive et elle offre par la suite exactement 5 cas longs pour la plupart pour arriver au cube. La méthode est certes systématique mais comme nous sommes à l'étape de préinspection, il est beaucoup plus efficace de trouver un chemin plus direct dans les 15 secondes qui nous sont aloués. </p>
+
+<h3>Préambule</h3>
+<p>Le BTC est une opération qui nécessite au maximum 7 flips pour être résolus. Il y a 90 cas au total. Bien heureusement, en comprenant correctement une dixaine de cas, il est très facile de s'y ramener en quelques flips ce qui rend cette étape très rapide.</p>
+<i>Par mesure de bonne compréhension : les schémas suivant représentent la face du haut et du bas en deux schémas. La face du bas est représentée comme lorsque l'on retourne le cube comme R2 ou x2.</i>
+
+<h3>Un premier cas</h3>
+<p>Afin de donner un premier exemple, voyons le cas qui est reconnu comme un des plus important : 
+<center>
+    <img border="0" src="img/shape_scallop.gif"/>
+    <img border="0" src="img/shape_kite.gif"/>
+</center>
+
+Sa résolution se fait ainsi :
+</p>
+    <center><img class="btc" src="btc.php?sequence=/(-1,-2)/(-3,0)/"/></center>
+<p>Bien grippé ce BTC se passe en dessous de la seconde. Remarquez que chaque position intermédiaire à la résolution du BTC est en soit un cas à connaître.</p>
+
+<h3>Réduction au cas</h3>
+<p>Voyons désormais comment résoudre la position: 
+<center>
+    <img border="0" src="img/shape_scallop.gif"/>
+    <img border="0" src="img/shape_leftfist.gif"/>
+</center>
+Il est possible de revenir dans la situation précédente en deux flips seulement. 
+</p>
+<center><table border="0"><tr>
+    <td><img class="btc" src="btc.php?end=2&sequence=(-4,0)/(0,3)/(2,-3)/(-1,-2)/(-3,0)/"/></td>
+    <td valign="center">&nbsp;&nbsp;&nbsp;&nbsp;ou&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><img class="btc" src="btc.php?end=2&sequence=(2,-3)/(3,0)/(-4,0)/(-1,-2)/(-3,0)/"/></td>
+    </tr></table></div></center>
+<p>Détaillons le pourquoi du comment ça marche. 
+<ul>
+<li>Dans le premier cas, on décide de garder les deux arêtes attachés ensemble. Les deux en angle droit vont se coller au bloc de 4. De ce fait, on a directement la formation de deux arêtes opposés. On a donc un bloc de 2, un de 4 et deux arêtes opposés. On peut former le BTC que l'on désire.</li>
+<li>Dans le deuxième cas, on décide de faire l'inverse en transformant les deux arêtes opposés en deux arêtes en angle droit. Nous obtenons donc un bloc de 4, et deux blocs en angle droit. </li>
+</ul></p>
+
+<h3>En général</h3>
+<p>Il vous faut vous baser sur les quelques BTC connus et rapides. Par la suite, il faut trouver une (ou des) réduction(s) rapide(s). Une fois la réduction calculée, tout doit aller très vite et pourrait se faire à l'aveugle. Le but final étant d'avoir un nombre très restreint (voire nul) de cas sur lequel vous n'avez pas de stratégie rapide.</p> 
+
+<p>De plus, il est très conseillé de savoir comment passer le même BTC en mirroir derrière (pour éviter de faire (6,6) dans le vide) et avec les étages inversé.</p>
+<a href="liste_btc.html">Voir des exemples de BTC</a>
+<a href="../optimbtc/">Consulter le solveur optimal de BTC</a>
+</body>
+</html>
